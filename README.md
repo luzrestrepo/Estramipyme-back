@@ -109,6 +109,6 @@
 - **Java** 🧑‍💻
 - **Spring Boot** 🚀
 - **Maven** 📦
-- **PostgreSQL** (using Aiven) 💾
+- **SQL** (using Aiven) 💾
 - **JWT** 🔒
 - **Cloudinary** for image management 🖼️
