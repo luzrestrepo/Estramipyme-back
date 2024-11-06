@@ -105,10 +105,17 @@
 
 ## 🛠 **Technologies Used**
 
-### **Backend:**
-- **Java** 🧑‍💻
-- **Spring Boot** 🚀
-- **Maven** 📦
-- **SQL** (using Aiven) 💾
-- **JWT** 🔒
-- **Cloudinary** for image management 🖼️
+## Backend Stack 🚀
+
+- ![Java](https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png) **Java**
+- ![Spring Boot](https://img.icons8.com/color/48/000000/spring-logo.png) **Spring Boot**
+- ![Maven](https://img.icons8.com/color/48/000000/apache-maven.png) **Maven**
+- ![SQL](https://img.icons8.com/ios-filled/50/000000/database.png) **SQL** (using Aiven)
+- ![Aiven](https://aiven.io/_next/static/media/logo.aee7ea12.svg) **Aiven**
+- ![JWT](https://img.icons8.com/color/48/000000/json-web-token.png) **JWT**
+- ![Cloudinary](https://res.cloudinary.com/demo/image/upload/q_auto,f_auto,fl_lossy,dpr_2.0,w_48/cloudinary_icon.png) **Cloudinary** for image management
+
+
+
+
+
