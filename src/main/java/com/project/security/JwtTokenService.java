@@ -2,8 +2,7 @@ package com.project.security;
 
 import org.springframework.stereotype.Service;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+
 
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import java.util.Map;
 
 @Service
 public class JwtTokenService {
-    private final String SECRET_KEY = "secretKey";
+    /* private final String SECRET_KEY = "secretKey";
 
     @SuppressWarnings("deprecation")
     public String generateToken(String username, String role) {
@@ -24,5 +23,5 @@ public class JwtTokenService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hora
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
-    }
+    } */
 }
