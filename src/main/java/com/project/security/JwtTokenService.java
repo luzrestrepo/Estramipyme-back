@@ -1,4 +1,4 @@
-/*package com.project.security;
+/* package com.project.security;
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Service
 public class JwtTokenService {
-    /* private final String SECRET_KEY = "secretKey";
+    private final String SECRET_KEY = "secretKey";
 
     @SuppressWarnings("deprecation")
     public String generateToken(String username, String role) {
@@ -23,6 +23,5 @@ public class JwtTokenService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hora
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
-    } */
-}
-*/
+    } 
+ */
