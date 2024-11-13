@@ -18,7 +18,7 @@ import com.project.services.AdminService;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminsController {
     @Autowired
     private AdminService adminService;
 

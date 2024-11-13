@@ -6,37 +6,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.project.models.AlertasModel;
+import com.project.models.AlertModel;
 import com.project.services.AlertasService;
 
 @RestController
 @RequestMapping("/alertas")
-public class AlertasController {
+public class AlertsController {
 
     @Autowired
     private AlertasService alertasService;
 
     @GetMapping
-    public List<AlertasModel> getAllAlertas() {
+    public List<AlertModel> getAllAlertas() {
         return alertasService.getAllAlertas();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlertasModel> getAlertaById(@PathVariable int id) {
+    public ResponseEntity<AlertModel> getAlertaById(@PathVariable int id) {
         return alertasService.getAlertaById(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public AlertasModel createAlerta(@RequestBody AlertasModel alerta) {
+    public AlertModel createAlerta(@RequestBody AlertModel alerta) {
         return alertasService.createAlerta(alerta);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlertasModel> updateAlerta(@PathVariable int id, @RequestBody AlertasModel alerta) {
+    public ResponseEntity<AlertModel> updateAlerta(@PathVariable int id, @RequestBody AlertModel alerta) {
         try {
-            AlertasModel updatedAlerta = alertasService.updateAlerta(id, alerta);
+            AlertModel updatedAlerta = alertasService.updateAlerta(id, alerta);
             return ResponseEntity.ok(updatedAlerta);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
