@@ -1,6 +1,5 @@
 package com.project.models;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,22 +8,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "profesores")
-public class TeacherModel {
+@Table(name = "teachers")
+public class TeachersModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false, length = 100)
-    private String nombre;
+    private String name;
 
-    @Column(nullable = false, length = 100, unique =true)
-    private String correo;
+    @Column(nullable = false, length = 100, unique = true)
+    private String email;
 
     @Column(nullable = false, length = 100)
-    private String contraseña;
+    private String password;
 
-    // GETTERS Y SETTERS 
+    // Getters and Setters 
     public int getId() {
         return id;
     }
@@ -34,28 +33,26 @@ public class TeacherModel {
     }
 
     public String getName() {
-        return nombre;
+        return name;
     }
 
-    public void setName(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
-        return correo;
+        return email;
     }
 
-    public void setEmail(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
-        return contraseña;
+        return password;
     }
 
-    public void setPassword(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-    
 }

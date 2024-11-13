@@ -1,10 +1,11 @@
 package com.project.repositories;
-import com.project.models.EmpresaModel;
 
+import com.project.models.ActivitiesModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<EmpresaModel, Integer> {
-    
+public interface ActivitiesRepository extends JpaRepository<ActivitiesModel, Long> {
+
 }
+
