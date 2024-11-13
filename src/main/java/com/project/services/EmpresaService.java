@@ -2,7 +2,7 @@ package com.project.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.project.models.Empresa;
+import com.project.models.EmpresaModel;
 import com.project.repositories.EmpresaRepository;
 
 import java.util.List;
@@ -14,15 +14,15 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
-    public List<Empresa> getAllEmpresas() {
+    public List<EmpresaModel> getAllEmpresas() {
         return empresaRepository.findAll();
     }
 
-    public Optional<Empresa> getEmpresaById(Integer empresaId) {
+    public Optional<EmpresaModel> getEmpresaById(Integer empresaId) {
         return empresaRepository.findById(empresaId);
     }
 
-    public Empresa createEmpresa(Empresa empresa) {
+    public EmpresaModel createEmpresa(EmpresaModel empresa) {
         // Asignar identificación a rut o nit 
         if ("Jurídica".equalsIgnoreCase(empresa.getTipo())) {
             empresa.setNit(empresa.getIdentificacion());
@@ -33,7 +33,7 @@ public class EmpresaService {
         return empresaRepository.save(empresa);
     }
 
-    public Empresa updateEmpresa(Integer empresaId, Empresa empresaDetails) {
+    public EmpresaModel updateEmpresa(Integer empresaId, EmpresaModel empresaDetails) {
         return empresaRepository.findById(empresaId).map(empresa -> {
             empresa.setSector(empresaDetails.getSector());
             empresa.setTipo(empresaDetails.getTipo());

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.models.AlertasModel;
+import com.project.models.AlertModel;
 import com.project.repositories.AlertasRepository;
 
 @Service
@@ -15,19 +15,19 @@ public class AlertasService {
     @Autowired
     private AlertasRepository alertasRepository;
 
-    public List<AlertasModel> getAllAlertas() {
+    public List<AlertModel> getAllAlertas() {
         return alertasRepository.findAll();
     }
 
-    public Optional<AlertasModel> getAlertaById(int id) {
+    public Optional<AlertModel> getAlertaById(int id) {
         return alertasRepository.findById(id);
     }
 
-    public AlertasModel createAlerta(AlertasModel alerta) {
+    public AlertModel createAlerta(AlertModel alerta) {
         return alertasRepository.save(alerta);
     }
 
-    public AlertasModel updateAlerta(int id, AlertasModel alerta) {
+    public AlertModel updateAlerta(int id, AlertModel alerta) {
         return alertasRepository.findById(id)
             .map(existingAlerta -> {
                 existingAlerta.setEmpresaId(alerta.getEmpresaId());

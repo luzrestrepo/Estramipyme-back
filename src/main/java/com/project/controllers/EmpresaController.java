@@ -1,6 +1,6 @@
 package com.project.controllers;
 
-import com.project.models.Empresa;
+import com.project.models.EmpresaModel;
 import com.project.services.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,25 +17,25 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @GetMapping
-    public List<Empresa> getAllEmpresas() {
+    public List<EmpresaModel> getAllEmpresas() {
         return empresaService.getAllEmpresas();
     }
 
     @GetMapping("/{empresaId}")
-    public ResponseEntity<Empresa> getEmpresaById(@PathVariable Integer empresaId) {
-        Optional<Empresa> empresa = empresaService.getEmpresaById(empresaId);
+    public ResponseEntity<EmpresaModel> getEmpresaById(@PathVariable Integer empresaId) {
+        Optional<EmpresaModel> empresa = empresaService.getEmpresaById(empresaId);
         return empresa.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Empresa createEmpresa(@RequestBody Empresa empresa) {
+    public EmpresaModel createEmpresa(@RequestBody EmpresaModel empresa) {
         // Llamamos al servicio para crear la empresa con los datos procesados
         return empresaService.createEmpresa(empresa);
     }
 
     @PutMapping("/{empresaId}")
-    public ResponseEntity<Empresa> updateEmpresa(@PathVariable Integer empresaId, @RequestBody Empresa empresaDetails) {
-        Empresa updatedEmpresa = empresaService.updateEmpresa(empresaId, empresaDetails);
+    public ResponseEntity<EmpresaModel> updateEmpresa(@PathVariable Integer empresaId, @RequestBody EmpresaModel empresaDetails) {
+        EmpresaModel updatedEmpresa = empresaService.updateEmpresa(empresaId, empresaDetails);
         return updatedEmpresa != null ? ResponseEntity.ok(updatedEmpresa) : ResponseEntity.notFound().build();
     }
 
