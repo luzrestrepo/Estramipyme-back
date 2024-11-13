@@ -13,36 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.models.AdminModel;
-import com.project.services.AdminService;
+import com.project.models.AdminsModel;
+import com.project.services.AdminsService;
 
 @RestController
 @RequestMapping("/admin")
 public class AdminsController {
     @Autowired
-    private AdminService adminService;
+    private AdminsService adminService;
 
     @GetMapping
-    public List<AdminModel> getAllAdmins() {
+    public List<AdminsModel> getAllAdmins() {
         return adminService.getAllAdmins();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdminModel> getAdminById(@PathVariable int id) {
+    public ResponseEntity<AdminsModel> getAdminById(@PathVariable int id) {
         return adminService.getAdminById(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public AdminModel createAdmin(@RequestBody AdminModel admin) {
+    public AdminsModel createAdmin(@RequestBody AdminsModel admin) {
         return adminService.createAdmin(admin);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AdminModel> updateAdmin(@PathVariable int id, @RequestBody AdminModel admin) {
+    public ResponseEntity<AdminsModel> updateAdmin(@PathVariable int id, @RequestBody AdminsModel admin) {
         try {
-            AdminModel updatedAdmin = adminService.updateAdmin(id, admin);
+            AdminsModel updatedAdmin = adminService.updateAdmin(id, admin);
             return ResponseEntity.ok(updatedAdmin);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

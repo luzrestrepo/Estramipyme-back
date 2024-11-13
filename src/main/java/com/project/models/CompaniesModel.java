@@ -3,29 +3,29 @@ package com.project.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "empresas")
-public class EmpresaModel {
+@Table(name = "companies")
+public class CompaniesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer empresaId;
+    private Integer companyId;
 
     @Column(name = "sector", length = 100)
     private String sector;
 
-    @Column(name = "tipo", length = 50)
-    private String tipo;
+    @Column(name = "type", length = 50)
+    private String type;
 
-    @Column(name = "nombre", length = 100)
-    private String nombre;
+    @Column(name = "name", length = 100)
+    private String name;
 
     @Column(name = "email", length = 100)
     private String email;
 
-    @Column(name = "contraseña", length = 100)
-    private String contraseña;
+    @Column(name = "password", length = 100)
+    private String password;
 
-    @Column(name = "tamaño_empresa", length = 20)
-    private String tamañoEmpresa;
+    @Column(name = "company_size", length = 20)
+    private String companySize;
 
     @Column(name = "rut", length = 20)
     private String rut;
@@ -33,17 +33,17 @@ public class EmpresaModel {
     @Column(name = "nit", length = 20)
     private String nit;
 
-    // Campo temporal para almacenar identificación
-    @Transient  // No se guarda en la base de datos
-    private String identificacion;
+    // Temporary field to store identification
+    @Transient  // Not stored in the database
+    private String identification;
 
 
-    public Integer getID() {
-        return empresaId;
+    public Integer getCompanyId() {
+        return companyId;
     }
 
-    public void setID(Integer empresaId) {
-        this.empresaId = empresaId;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
     public String getSector() {
@@ -54,20 +54,20 @@ public class EmpresaModel {
         this.sector = sector;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -78,20 +78,20 @@ public class EmpresaModel {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getTamañoEmpresa() {
-        return tamañoEmpresa;
+    public String getCompanySize() {
+        return companySize;
     }
 
-    public void setTamañoEmpresa(String tamañoEmpresa) {
-        this.tamañoEmpresa = tamañoEmpresa;
+    public void setCompanySize(String companySize) {
+        this.companySize = companySize;
     }
 
     public String getRut() {
@@ -110,11 +110,11 @@ public class EmpresaModel {
         this.nit = nit;
     }
 
-    public String getIdentificacion() {
-        return identificacion;
+    public String getIdentification() {
+        return identification;
     }
 
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 }

@@ -2,63 +2,62 @@ package com.project.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.project.models.EmpresaModel;
-import com.project.repositories.EmpresaRepository;
+import com.project.models.CompaniesModel;
+import com.project.repositories.CompaniesRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmpresaService {
+public class CompaniesService {
+@Autowired
+private CompaniesRepository companiesRepository;
 
-    @Autowired
-    private EmpresaRepository empresaRepository;
+public List<CompaniesModel> getAllCompanies() {
+    return companiesRepository.findAll();
+}
 
-    public List<EmpresaModel> getAllEmpresas() {
-        return empresaRepository.findAll();
+public Optional<CompaniesModel> getCompanyById(Integer companyId) {
+    return companiesRepository.findById(companyId);
+}
+
+public CompaniesModel createCompany(CompaniesModel company) {
+    // Assign identification to rut or nit
+    if ("Legal".equalsIgnoreCase(company.getType())) {
+        company.setNit(company.getIdentification());
+    } else if ("Natural".equalsIgnoreCase(company.getType())) {
+        company.setRut(company.getIdentification());
     }
+    company.setIdentification(null);  // Clear the temporary field
+    return companiesRepository.save(company);
+}
 
-    public Optional<EmpresaModel> getEmpresaById(Integer empresaId) {
-        return empresaRepository.findById(empresaId);
-    }
+public CompaniesModel updateCompany(Integer companyId, CompaniesModel companyDetails) {
+    return companiesRepository.findById(companyId).map(company -> {
+        company.setSector(companyDetails.getSector());
+        company.setType(companyDetails.getType());
+        company.setName(companyDetails.getName());
+        company.setEmail(companyDetails.getEmail());
+        company.setPassword(companyDetails.getPassword());
+        company.setCompanySize(companyDetails.getCompanySize());
 
-    public EmpresaModel createEmpresa(EmpresaModel empresa) {
-        // Asignar identificación a rut o nit 
-        if ("Jurídica".equalsIgnoreCase(empresa.getTipo())) {
-            empresa.setNit(empresa.getIdentificacion());
-        } else if ("Natural".equalsIgnoreCase(empresa.getTipo())) {
-            empresa.setRut(empresa.getIdentificacion());
+        // Update the nit or rut based on the type
+        if ("Legal".equalsIgnoreCase(companyDetails.getType())) {
+            company.setNit(companyDetails.getIdentification());
+            company.setRut(null);  
+        } else if ("Natural".equalsIgnoreCase(companyDetails.getType())) {
+            company.setRut(companyDetails.getIdentification());
+            company.setNit(null);  
         }
-        empresa.setIdentificacion(null);  // Limpiar el campo temporal 
-        return empresaRepository.save(empresa);
-    }
 
-    public EmpresaModel updateEmpresa(Integer empresaId, EmpresaModel empresaDetails) {
-        return empresaRepository.findById(empresaId).map(empresa -> {
-            empresa.setSector(empresaDetails.getSector());
-            empresa.setTipo(empresaDetails.getTipo());
-            empresa.setNombre(empresaDetails.getNombre());
-            empresa.setEmail(empresaDetails.getEmail());
-            empresa.setContraseña(empresaDetails.getContraseña());
-            empresa.setTamañoEmpresa(empresaDetails.getTamañoEmpresa());
+        return companiesRepository.save(company);
+    }).orElse(null);
+}
 
-            // Actualizar el nit o rut según el tipo
-            if ("Jurídica".equalsIgnoreCase(empresaDetails.getTipo())) {
-                empresa.setNit(empresaDetails.getIdentificacion());
-                empresa.setRut(null);  
-            } else if ("Natural".equalsIgnoreCase(empresaDetails.getTipo())) {
-                empresa.setRut(empresaDetails.getIdentificacion());
-                empresa.setNit(null);  
-            }
-
-            return empresaRepository.save(empresa);
-        }).orElse(null);
-    }
-
-    public boolean deleteEmpresa(Integer empresaId) {
-        return empresaRepository.findById(empresaId).map(empresa -> {
-            empresaRepository.delete(empresa);
-            return true;
-        }).orElse(false);
-    }
+public boolean deleteCompany(Integer companyId) {
+    return companiesRepository.findById(companyId).map(company -> {
+        companiesRepository.delete(company);
+        return true;
+    }).orElse(false);
+}
 }

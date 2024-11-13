@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.models.AdminsModel;
-import com.project.repositories.AdminRepository;
+import com.project.repositories.AdminsRepository;
 
 @Service
 public class AdminsService {
 
     @Autowired
-    private AdminRepository adminRepository;
+    private AdminsRepository adminRepository;
 
     public List<AdminsModel> getAllAdmins() {
         return adminRepository.findAll();

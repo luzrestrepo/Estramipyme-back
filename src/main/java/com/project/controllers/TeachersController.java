@@ -13,36 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.models.TeacherModel;
-import com.project.services.TeacherService;
+import com.project.models.TeachersModel;
+import com.project.services.TeachersService;
 
 @RestController
 @RequestMapping("/api/teacher")
-public class TeacherController {
+public class TeachersController {
     @Autowired
-    private TeacherService teacherService;
+    private TeachersService teachersService;
 
     @GetMapping
-    public List<TeacherModel> getAllTeachers(){
-        return teacherService.getAllTeachers();
+    public List<TeachersModel> getAllTeachers(){
+        return teachersService.getAllTeachers();
     }
 
      @GetMapping("/{id}")
-    public ResponseEntity<TeacherModel> getTeacherById(@PathVariable int id) {
-        return teacherService.getTeacherById(id)
+    public ResponseEntity<TeachersModel> getTeacherById(@PathVariable int id) {
+        return teachersService.getTeacherById(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public TeacherModel createTeacher(@RequestBody TeacherModel profesor) {
-        return teacherService.createTeacher(profesor);
+    public TeachersModel createTeacher(@RequestBody TeachersModel profesor) {
+        return teachersService.createTeacher(profesor);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TeacherModel> updateTeacher(@PathVariable int id, @RequestBody TeacherModel profesor) {
+    public ResponseEntity<TeachersModel> updateTeacher(@PathVariable int id, @RequestBody TeachersModel profesor) {
         try {
-            TeacherModel updatedTeacher = teacherService.updateTeacher(id, profesor);
+            TeachersModel updatedTeacher = teachersService.updateTeacher(id, profesor);
             return ResponseEntity.ok(updatedTeacher);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -51,7 +51,7 @@ public class TeacherController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTeacher(@PathVariable int id) {
-        teacherService.deleteTeacher(id);
+        teachersService.deleteTeacher(id);
         return ResponseEntity.noContent().build();
     }
 }

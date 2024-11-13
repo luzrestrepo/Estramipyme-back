@@ -1,7 +1,7 @@
 package com.project.controllers;
 
-import com.project.models.EmpresaModel;
-import com.project.services.EmpresaService;
+import com.project.models.CompaniesModel;
+import com.project.services.CompaniesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,37 +10,38 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/empresas")
+@RequestMapping("/companies")
 public class CompaniesController {
 
     @Autowired
-    private EmpresaService empresaService;
+    private CompaniesService companiesService;
 
     @GetMapping
-    public List<EmpresaModel> getAllEmpresas() {
-        return empresaService.getAllEmpresas();
+    public List<CompaniesModel> getAllCompanies() {
+        return companiesService.getAllCompanies();
     }
 
-    @GetMapping("/{empresaId}")
-    public ResponseEntity<EmpresaModel> getEmpresaById(@PathVariable Integer empresaId) {
-        Optional<EmpresaModel> empresa = empresaService.getEmpresaById(empresaId);
-        return empresa.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{companyId}")
+    public ResponseEntity<CompaniesModel> getCompanyById(@PathVariable Integer companyId) {
+        Optional<CompaniesModel> company = companiesService.getCompanyById(companyId);
+        return company.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public EmpresaModel createEmpresa(@RequestBody EmpresaModel empresa) {
-        // Llamamos al servicio para crear la empresa con los datos procesados
-        return empresaService.createEmpresa(empresa);
+    public CompaniesModel createCompany(@RequestBody CompaniesModel company) {
+        // Call the service to create the company with the processed data
+        return companiesService.createCompany(company);
     }
 
-    @PutMapping("/{empresaId}")
-    public ResponseEntity<EmpresaModel> updateEmpresa(@PathVariable Integer empresaId, @RequestBody EmpresaModel empresaDetails) {
-        EmpresaModel updatedEmpresa = empresaService.updateEmpresa(empresaId, empresaDetails);
-        return updatedEmpresa != null ? ResponseEntity.ok(updatedEmpresa) : ResponseEntity.notFound().build();
+    @PutMapping("/{companyId}")
+    public ResponseEntity<CompaniesModel> updateCompany(@PathVariable Integer companyId, @RequestBody CompaniesModel companyDetails) {
+        CompaniesModel updatedCompany = companiesService.updateCompany(companyId, companyDetails);
+        return updatedCompany != null ? ResponseEntity.ok(updatedCompany) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{empresaId}")
-    public ResponseEntity<Void> deleteEmpresa(@PathVariable Integer empresaId) {
-        return empresaService.deleteEmpresa(empresaId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    @DeleteMapping("/{companyId}")
+    public ResponseEntity<Void> deleteCompany(@PathVariable Integer companyId) {
+        return companiesService.deleteCompany(companyId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 }
+

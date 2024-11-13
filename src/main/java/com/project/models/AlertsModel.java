@@ -3,23 +3,23 @@ package com.project.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "alertas")
-public class AlertModel {
+@Table(name = "alerts")
+public class AlertsModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false)
-    private int empresaId;
+    private int companyId;
 
     @Column(nullable = false, length = 50)
-    private String tipo;
+    private String type;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String descripcion;
+    private String description;
 
-    // Getters y Setters
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -28,27 +28,27 @@ public class AlertModel {
         this.id = id;
     }
 
-    public int getEmpresaId() {
-        return empresaId;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setEmpresaId(int empresaId) {
-        this.empresaId = empresaId;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,7 +1,7 @@
 package com.project.services;
 
-import com.project.models.ActividadModel;
-import com.project.repositories.ActividadRepository;
+import com.project.models.ActivitiesModel;
+import com.project.repositories.ActivitiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,31 +9,31 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ActividadService {
+public class ActivitiesService {
 
     @Autowired
-    private ActividadRepository actividadRepository;
+    private ActivitiesRepository activitiesRepository;
 
-    public List<ActividadModel> getActividades() {
-        return actividadRepository.findAll();
+    public List<ActivitiesModel> getActivities() {
+        return activitiesRepository.findAll();
     }
 
-    public ActividadModel saveActividad(ActividadModel actividad) {
-        return actividadRepository.save(actividad);
+    public ActivitiesModel saveActivities(ActivitiesModel activities) {
+        return activitiesRepository.save(activities);
     }
 
-    public Optional<ActividadModel> getActividadById(Long id) {
-        return actividadRepository.findById(id);
+    public Optional<ActivitiesModel> getActivitiesById(Long id) {
+        return activitiesRepository.findById(id);
     }
 
-    public ActividadModel updateActividadById(ActividadModel actividad, Long id) {
-        actividad.setId(id);
-        return actividadRepository.save(actividad);
+    public ActivitiesModel updateActivitiesById(ActivitiesModel activities, Long id) {
+        activities.setId(id);
+        return activitiesRepository.save(activities);
     }
 
-    public boolean deleteActividad(Long id) {
+    public boolean deleteActivities(Long id) {
         try {
-            actividadRepository.deleteById(id);
+            activitiesRepository.deleteById(id);
             return true;
         } catch (Exception e) {
             return false;

@@ -6,39 +6,39 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.models.AlertModel;
-import com.project.repositories.AlertasRepository;
+import com.project.models.AlertsModel;
+import com.project.repositories.AlertsRepository;
 
 @Service
-public class AlertasService {
+public class AlertsService {
 
     @Autowired
-    private AlertasRepository alertasRepository;
+    private AlertsRepository AlertsRepository;
 
-    public List<AlertModel> getAllAlertas() {
-        return alertasRepository.findAll();
+    public List<AlertsModel> getAllAlerts() {
+        return AlertsRepository.findAll();
     }
 
-    public Optional<AlertModel> getAlertaById(int id) {
-        return alertasRepository.findById(id);
+    public Optional<AlertsModel> getAlertById(int id) {
+        return AlertsRepository.findById(id);
     }
 
-    public AlertModel createAlerta(AlertModel alerta) {
-        return alertasRepository.save(alerta);
+    public AlertsModel createAlert(AlertsModel alert) {
+        return AlertsRepository.save(alert);
     }
 
-    public AlertModel updateAlerta(int id, AlertModel alerta) {
-        return alertasRepository.findById(id)
-            .map(existingAlerta -> {
-                existingAlerta.setEmpresaId(alerta.getEmpresaId());
-                existingAlerta.setTipo(alerta.getTipo());
-                existingAlerta.setDescripcion(alerta.getDescripcion());
-                return alertasRepository.save(existingAlerta);
+    public AlertsModel updateAlert(int id, AlertsModel alert) {
+        return AlertsRepository.findById(id)
+            .map(existingAlert -> {
+                existingAlert.setCompanyId(alert.getCompanyId());
+                existingAlert.setType(alert.getType());
+                existingAlert.setDescription(alert.getDescription());
+                return AlertsRepository.save(existingAlert);
             })
-            .orElseThrow(() -> new RuntimeException("Alerta no encontrada"));
+            .orElseThrow(() -> new RuntimeException("Alert not found"));
     }
 
-    public void deleteAlerta(int id) {
-        alertasRepository.deleteById(id);
+    public void deleteAlert(int id) {
+        AlertsRepository.deleteById(id);
     }
 }
