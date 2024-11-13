@@ -17,7 +17,7 @@ import com.project.models.TeachersModel;
 import com.project.services.TeachersService;
 
 @RestController
-@RequestMapping("/api/teacher")
+@RequestMapping("/teachers")
 public class TeachersController {
     @Autowired
     private TeachersService teachersService;

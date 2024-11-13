@@ -6,37 +6,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.project.models.AlertModel;
-import com.project.services.AlertasService;
+import com.project.models.AlertsModel;
+import com.project.services.AlertsService;
 
 @RestController
-@RequestMapping("/alertas")
+@RequestMapping("/alerts")
 public class AlertsController {
 
     @Autowired
-    private AlertasService alertasService;
+    private AlertsService alertsService;
 
     @GetMapping
-    public List<AlertModel> getAllAlertas() {
-        return alertasService.getAllAlertas();
+    public List<AlertsModel> getAllAlertas() {
+        return alertsService.getAllAlerts();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlertModel> getAlertaById(@PathVariable int id) {
-        return alertasService.getAlertaById(id)
+    public ResponseEntity<AlertsModel> getAlertaById(@PathVariable int id) {
+        return alertsService.getAlertById(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public AlertModel createAlerta(@RequestBody AlertModel alerta) {
-        return alertasService.createAlerta(alerta);
+    public AlertsModel createAlerta(@RequestBody AlertsModel alert) {
+        return alertsService.createAlert(alert);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlertModel> updateAlerta(@PathVariable int id, @RequestBody AlertModel alerta) {
+    public ResponseEntity<AlertsModel> updateAlerta(@PathVariable int id, @RequestBody AlertsModel alerta) {
         try {
-            AlertModel updatedAlerta = alertasService.updateAlerta(id, alerta);
+            AlertsModel updatedAlerta = alertsService.updateAlert(id, alerta);
             return ResponseEntity.ok(updatedAlerta);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -45,7 +45,7 @@ public class AlertsController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAlerta(@PathVariable int id) {
-        alertasService.deleteAlerta(id);
+        alertsService.deleteAlert(id);
         return ResponseEntity.noContent().build();
     }
 }
