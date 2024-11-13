@@ -17,7 +17,7 @@ import com.project.models.AdminsModel;
 import com.project.services.AdminsService;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admins")
 public class AdminsController {
     @Autowired
     private AdminsService adminService;

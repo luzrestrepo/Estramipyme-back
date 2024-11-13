@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/companies")
+@RequestMapping("/api/companies")
 public class CompaniesController {
 
     @Autowired
@@ -21,27 +21,26 @@ public class CompaniesController {
         return companiesService.getAllCompanies();
     }
 
-    @GetMapping("/{companyId}")
-    public ResponseEntity<CompaniesModel> getCompanyById(@PathVariable Integer companyId) {
-        Optional<CompaniesModel> company = companiesService.getCompanyById(companyId);
-        return company.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{id}")
+    public ResponseEntity<CompaniesModel> getCompanyById(@PathVariable Integer id) {
+        Optional<CompaniesModel> company = companiesService.getCompanyById(id);
+        return company.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public CompaniesModel createCompany(@RequestBody CompaniesModel company) {
-        // Call the service to create the company with the processed data
         return companiesService.createCompany(company);
     }
 
-    @PutMapping("/{companyId}")
-    public ResponseEntity<CompaniesModel> updateCompany(@PathVariable Integer companyId, @RequestBody CompaniesModel companyDetails) {
-        CompaniesModel updatedCompany = companiesService.updateCompany(companyId, companyDetails);
+    @PutMapping("/{id}")
+    public ResponseEntity<CompaniesModel> updateCompany(@PathVariable Integer id, @RequestBody CompaniesModel companyDetails) {
+        CompaniesModel updatedCompany = companiesService.updateCompany(id, companyDetails);
         return updatedCompany != null ? ResponseEntity.ok(updatedCompany) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{companyId}")
-    public ResponseEntity<Void> deleteCompany(@PathVariable Integer companyId) {
-        return companiesService.deleteCompany(companyId) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCompany(@PathVariable Integer id) {
+        boolean deleted = companiesService.deleteCompany(id);
+        return deleted ? ResponseEntity.ok("Company with id " + id + " deleted.") : ResponseEntity.notFound().build();
     }
 }
-
