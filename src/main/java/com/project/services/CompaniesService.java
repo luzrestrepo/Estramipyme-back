@@ -10,54 +10,58 @@ import java.util.Optional;
 
 @Service
 public class CompaniesService {
-@Autowired
-private CompaniesRepository companiesRepository;
 
-public List<CompaniesModel> getAllCompanies() {
-    return companiesRepository.findAll();
-}
+    @Autowired
+    private CompaniesRepository companiesRepository;
 
-public Optional<CompaniesModel> getCompanyById(Integer companyId) {
-    return companiesRepository.findById(companyId);
-}
-
-public CompaniesModel createCompany(CompaniesModel company) {
-    // Assign identification to rut or nit
-    if ("Legal".equalsIgnoreCase(company.getType())) {
-        company.setNit(company.getIdentification());
-    } else if ("Natural".equalsIgnoreCase(company.getType())) {
-        company.setRut(company.getIdentification());
+    public List<CompaniesModel> getAllCompanies() {
+        return companiesRepository.findAll();
     }
-    company.setIdentification(null);  // Clear the temporary field
-    return companiesRepository.save(company);
-}
 
-public CompaniesModel updateCompany(Integer companyId, CompaniesModel companyDetails) {
-    return companiesRepository.findById(companyId).map(company -> {
-        company.setSector(companyDetails.getSector());
-        company.setType(companyDetails.getType());
-        company.setName(companyDetails.getName());
-        company.setEmail(companyDetails.getEmail());
-        company.setPassword(companyDetails.getPassword());
-        company.setCompanySize(companyDetails.getCompanySize());
+    public Optional<CompaniesModel> getCompanyById(Integer companyId) {
+        return companiesRepository.findById(companyId);
+    }
 
-        // Update the nit or rut based on the type
-        if ("Legal".equalsIgnoreCase(companyDetails.getType())) {
-            company.setNit(companyDetails.getIdentification());
-            company.setRut(null);  
-        } else if ("Natural".equalsIgnoreCase(companyDetails.getType())) {
-            company.setRut(companyDetails.getIdentification());
-            company.setNit(null);  
+    public CompaniesModel createCompany(CompaniesModel company) {
+        // Assign identification to rut or nit
+        if ("Legal".equalsIgnoreCase(company.getType())) {
+            company.setNit(company.getIdentification());
+        } else if ("Natural".equalsIgnoreCase(company.getType())) {
+            company.setRut(company.getIdentification());
         }
-
+        company.setIdentification(null);  // Clear the temporary field
         return companiesRepository.save(company);
-    }).orElse(null);
-}
+    }
 
-public boolean deleteCompany(Integer companyId) {
-    return companiesRepository.findById(companyId).map(company -> {
-        companiesRepository.delete(company);
-        return true;
-    }).orElse(false);
-}
+    public CompaniesModel updateCompany(Integer companyId, CompaniesModel companyDetails) {
+        return companiesRepository.findById(companyId).map(company -> {
+            company.setProfessorId(companyDetails.getProfessorId());
+            company.setSector(companyDetails.getSector());
+            company.setType(companyDetails.getType());
+            company.setName(companyDetails.getName());
+            company.setEmail(companyDetails.getEmail());
+            company.setPassword(companyDetails.getPassword());
+            company.setSectorSize(companyDetails.getSectorSize());
+            company.setRepresentative(companyDetails.getRepresentative());
+            company.setCompanySize(companyDetails.getCompanySize());
+
+            // Update the nit or rut based on the type
+            if ("Legal".equalsIgnoreCase(companyDetails.getType())) {
+                company.setNit(companyDetails.getIdentification());
+                company.setRut(null);
+            } else if ("Natural".equalsIgnoreCase(companyDetails.getType())) {
+                company.setRut(companyDetails.getIdentification());
+                company.setNit(null);
+            }
+
+            return companiesRepository.save(company);
+        }).orElse(null);
+    }
+
+    public boolean deleteCompany(Integer companyId) {
+        return companiesRepository.findById(companyId).map(company -> {
+            companiesRepository.delete(company);
+            return true;
+        }).orElse(false);
+    }
 }
