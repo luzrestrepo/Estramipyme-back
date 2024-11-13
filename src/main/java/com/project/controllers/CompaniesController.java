@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/empresas")
-public class EmpresaController {
+public class CompaniesController {
 
     @Autowired
     private EmpresaService empresaService;

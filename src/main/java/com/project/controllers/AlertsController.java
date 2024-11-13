@@ -11,7 +11,7 @@ import com.project.services.AlertasService;
 
 @RestController
 @RequestMapping("/alertas")
-public class AlertasController {
+public class AlertsController {
 
     @Autowired
     private AlertasService alertasService;
