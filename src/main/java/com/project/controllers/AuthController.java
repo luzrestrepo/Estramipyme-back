@@ -1,4 +1,4 @@
-package com.project.controllers;
+/*package com.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -56,3 +56,4 @@ class AuthResponse {
         return token;
     } */
 }
+*/
