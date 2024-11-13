@@ -10,7 +10,7 @@ import com.project.security.JwtTokenService;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
+    /* @Autowired
     private JwtTokenService jwtTokenService;
 
     @PostMapping("/login")
@@ -22,11 +22,11 @@ public class AuthController {
         } else {
             return ResponseEntity.status(401).body("Credenciales inválidas");
         }
-    }
+    } */
 }
 
 class AuthRequest {
-    private String email;
+    /* private String email;
     private String password;
 
     // Getters y setters
@@ -41,11 +41,11 @@ class AuthRequest {
     }
     public void setPassword(String password) {
         this.password = password;
-    }
+    } */
 }
 
 class AuthResponse {
-    private String token;
+   /*  private String token;
 
     public AuthResponse(String token) {
         this.token = token;
@@ -54,6 +54,6 @@ class AuthResponse {
     // Getter para el token
     public String getToken() {
         return token;
-    }
+    } */
 }
 */
