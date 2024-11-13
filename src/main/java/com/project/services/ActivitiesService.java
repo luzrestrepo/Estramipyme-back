@@ -1,7 +1,7 @@
 package com.project.services;
 
 import com.project.models.ActividadModel;
-import com.project.repositories.IActividadRepository;
+import com.project.repositories.ActividadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ActividadService {
 
     @Autowired
-    private IActividadRepository actividadRepository;
+    private ActividadRepository actividadRepository;
 
     public List<ActividadModel> getActividades() {
         return actividadRepository.findAll();

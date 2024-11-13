@@ -1,7 +1,7 @@
 package com.project.controllers;
 
 
-import com.project.models.ActividadModel;
+import com.project.models.ActivitiesModel;
 import com.project.services.ActividadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ public class ActividadController {
     private ActividadService actividadService;
 
     @GetMapping
-    public List<ActividadModel> getActividades() {
+    public List<ActivitiesModel> getActividades() {
         return actividadService.getActividades();
     }
 
