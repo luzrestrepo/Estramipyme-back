@@ -1,4 +1,4 @@
-package com.project.security;
+package com.project.services;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,14 +12,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtTokenService jwtTokenService;
+    private JwtTokenManagerService jwtTokenService; // Asegúrate de que JwtTokenService esté anotado como @Service o @Component
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -36,13 +35,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-            username = jwtTokenService.extractUsername(jwt);
+            username = jwtTokenService.extractUsername(jwt); // Asegúrate de que extractUsername esté implementado en JwtTokenService
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
-            if (jwtTokenService.isTokenValid(jwt, userDetails.getUsername())) {
+            if (jwtTokenService.isTokenValid(jwt, userDetails.getUsername())) { // Asegúrate de que isTokenValid esté implementado en JwtTokenService
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

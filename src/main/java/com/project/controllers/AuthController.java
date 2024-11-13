@@ -1,22 +1,24 @@
 package com.project.controllers;
 
-import com.project.security.JwtTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.project.services.JwtTokenManagerService;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
+    @SuppressWarnings("unused")
     @Autowired
-    private JwtTokenService jwtTokenService;
+    private JwtTokenManagerService jwtTokenService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
         // Simulación de autenticación; valida las credenciales contra la base de datos
         if ("user@example.com".equals(authRequest.getEmail()) && "password123".equals(authRequest.getPassword())) {
-                            String token = jwtTokenService.generateToken(authRequest.getEmail(), "USER");
+                            String token = JwtTokenManagerService.generateToken(authRequest.getEmail(), "USER");
                             return ResponseEntity.ok(new AuthResponse(token));
                         } else {
                             return ResponseEntity.status(401).body("Credenciales inválidas");
