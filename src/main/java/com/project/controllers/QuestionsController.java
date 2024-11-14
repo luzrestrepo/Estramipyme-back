@@ -22,9 +22,10 @@ public class QuestionsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QuestionsModel> getQuestionById(@PathVariable Integer id) {
+    public ResponseEntity<QuestionsModel> getQuestionById(@PathVariable int id) {
         Optional<QuestionsModel> question = questionsService.getQuestionById(id);
-        return question.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return question.map(ResponseEntity::ok)
+                       .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -33,14 +34,13 @@ public class QuestionsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<QuestionsModel> updateQuestion(@PathVariable Integer id, @RequestBody QuestionsModel questionDetails) {
-        QuestionsModel updatedQuestion = questionsService.updateQuestion(id, questionDetails);
+    public ResponseEntity<QuestionsModel> updateQuestion(@PathVariable int id, @RequestBody QuestionsModel question) {
+        QuestionsModel updatedQuestion = questionsService.updateQuestion(id, question);
         return updatedQuestion != null ? ResponseEntity.ok(updatedQuestion) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQuestion(@PathVariable Integer id) {
-        boolean deleted = questionsService.deleteQuestion(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    public ResponseEntity<Void> deleteQuestion(@PathVariable int id) {
+        return questionsService.deleteQuestion(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 }
