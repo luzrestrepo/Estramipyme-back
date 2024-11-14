@@ -1,50 +1,43 @@
 package com.project.models;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "preguntas")
+@Table(name = "questions")
 public class QuestionsModel {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "test_id")
-    private int testId;
+    @Column(name = "test_id", nullable = false)
+    private Integer testId;
 
-    @SuppressWarnings("unused")
-    private String pregunta;
+    @Column(name = "question", columnDefinition = "TEXT", nullable = false)
+    private String question;
 
-    @Column(name = "empresa_id")
-    private int empresaId;
-
-    @Enumerated(EnumType.STRING)
-    private Tipo tipo;
-
-    @Column(name = "opciones_seleccion")
-    private String opcionesSeleccion;
-
-    @SuppressWarnings("unused")
-    private boolean activa;
-
-    @ManyToOne
-    @JoinColumn(name = "test_id", insertable = false, updatable = false)
-    private TestModel test;
-
-    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<AnswersModel> respuestas;
-
-    public enum Tipo {
-        ABIERTA,
-        SELECCION
+    // Getters and Setters
+    public Integer getId() {
+        return id;
     }
 
-    public void setId(int id2) {
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    // Getters y Setters
+    public Integer getTestId() {
+        return testId;
+    }
+
+    public void setTestId(Integer testId) {
+        this.testId = testId;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
 }
-

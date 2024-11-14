@@ -3,29 +3,41 @@ package com.project.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "respuestas")
+@Table(name = "answers")
 public class AnswersModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "pregunta_id")
-    private int preguntaId;
+    @Column(name = "question_id", nullable = false)
+    private Integer questionId;
 
-    @SuppressWarnings("unused")
-    private String respuesta;
+    @Column(name = "answer", columnDefinition = "TEXT", nullable = false)
+    private String answer;
 
-    @Column(name = "empresa_id")
-    private int empresaId;
-
-    @ManyToOne
-    @JoinColumn(name = "pregunta_id", insertable = false, updatable = false)
-    private QuestionsModel pregunta;
-
-    public void setId(int id2) {
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    // Getters and Setters
+    public Integer getId() {
+        return id;
     }
 
-    // Getters y Setters
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

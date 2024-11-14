@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/answers")
@@ -15,37 +16,31 @@ public class AnswersController {
     @Autowired
     private AnswersService answersService;
 
-    // Obtener todas las respuestas
     @GetMapping
     public List<AnswersModel> getAllAnswers() {
         return answersService.getAllAnswers();
     }
 
-    // Obtener una respuesta por ID
     @GetMapping("/{id}")
-    public ResponseEntity<AnswersModel> getAnswerById(@PathVariable int id) {
-        return answersService.getAnswerById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<AnswersModel> getAnswerById(@PathVariable Integer id) {
+        Optional<AnswersModel> answer = answersService.getAnswerById(id);
+        return answer.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    // Crear una nueva respuesta
     @PostMapping
     public AnswersModel createAnswer(@RequestBody AnswersModel answer) {
         return answersService.createAnswer(answer);
     }
 
-    // Actualizar una respuesta existente
     @PutMapping("/{id}")
-    public ResponseEntity<AnswersModel> updateAnswer(@PathVariable int id, @RequestBody AnswersModel answer) {
-        return answersService.updateAnswer(id, answer)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<AnswersModel> updateAnswer(@PathVariable Integer id, @RequestBody AnswersModel answerDetails) {
+        AnswersModel updatedAnswer = answersService.updateAnswer(id, answerDetails);
+        return updatedAnswer != null ? ResponseEntity.ok(updatedAnswer) : ResponseEntity.notFound().build();
     }
 
-    // Eliminar una respuesta
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAnswer(@PathVariable int id) {
-        return answersService.deleteAnswer(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    public ResponseEntity<Void> deleteAnswer(@PathVariable Integer id) {
+        boolean deleted = answersService.deleteAnswer(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 }

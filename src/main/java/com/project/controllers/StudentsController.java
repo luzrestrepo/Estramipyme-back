@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
@@ -23,8 +22,9 @@ public class StudentsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentsModel> getStudentById(@PathVariable Long id) {
-        Optional<StudentsModel> student = studentsService.getStudentById(id);
-        return student.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return studentsService.getStudentById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -35,12 +35,15 @@ public class StudentsController {
     @PutMapping("/{id}")
     public ResponseEntity<StudentsModel> updateStudent(@PathVariable Long id, @RequestBody StudentsModel student) {
         StudentsModel updatedStudent = studentsService.updateStudent(id, student);
-        return ResponseEntity.ok(updatedStudent);
+        return updatedStudent != null ? ResponseEntity.ok(updatedStudent) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
-        boolean deleted = studentsService.deleteStudent(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        if (studentsService.deleteStudent(id)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

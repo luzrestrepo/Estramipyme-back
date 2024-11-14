@@ -12,36 +12,32 @@ import java.util.Optional;
 public class QuestionsService {
 
     @Autowired
-    private QuestionsRepository preguntasRepository;
+    private QuestionsRepository questionsRepository;
 
-    // Obtiene todas las preguntas
     public List<QuestionsModel> getAllQuestions() {
-        return preguntasRepository.findAll();
+        return questionsRepository.findAll();
     }
 
-    // Obtiene una pregunta por su ID
-    public Optional<QuestionsModel> getQuestionById(int id) {
-        return preguntasRepository.findById(id);
+    public Optional<QuestionsModel> getQuestionById(Integer id) {
+        return questionsRepository.findById(id);
     }
 
-    // Crea una nueva pregunta
     public QuestionsModel createQuestion(QuestionsModel question) {
-        return preguntasRepository.save(question);
+        return questionsRepository.save(question);
     }
 
-    // Actualiza una pregunta existente
-    public QuestionsModel updateQuestion(int id, QuestionsModel question) {
-        question.setId(id);
-        return preguntasRepository.save(question);
+    public QuestionsModel updateQuestion(Integer id, QuestionsModel questionDetails) {
+        return questionsRepository.findById(id).map(question -> {
+            question.setTestId(questionDetails.getTestId());
+            question.setQuestion(questionDetails.getQuestion());
+            return questionsRepository.save(question);
+        }).orElse(null);
     }
 
-    // Elimina una pregunta por su ID
-    public boolean deleteQuestion(int id) {
-        try {
-            preguntasRepository.deleteById(id);
+    public boolean deleteQuestion(Integer id) {
+        return questionsRepository.findById(id).map(question -> {
+            questionsRepository.delete(question);
             return true;
-        } catch (Exception e) {
-            return false;
-        }
+        }).orElse(false);
     }
 }

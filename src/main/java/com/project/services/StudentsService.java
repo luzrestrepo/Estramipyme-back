@@ -12,31 +12,37 @@ import java.util.Optional;
 public class StudentsService {
 
     @Autowired
-    private StudentsRepository studentsRepository;
+    private StudentsRepository studentRepository;
 
     public List<StudentsModel> getAllStudents() {
-        return studentsRepository.findAll();
+        return studentRepository.findAll();
     }
 
     public Optional<StudentsModel> getStudentById(Long id) {
-        return studentsRepository.findById(id);
+        return studentRepository.findById(id);
     }
 
     public StudentsModel createStudent(StudentsModel student) {
-        return studentsRepository.save(student);
+        return studentRepository.save(student);
     }
 
-    public StudentsModel updateStudent(Long id, StudentsModel student) {
-        student.setId(id);
-        return studentsRepository.save(student);
+    public StudentsModel updateStudent(Long id, StudentsModel studentDetails) {
+        return studentRepository.findById(id).map(student -> {
+            student.setCompanyId(studentDetails.getCompanyId());
+            student.setProfessorId(studentDetails.getProfessorId());
+            student.setName(studentDetails.getName());
+            student.setEmail(studentDetails.getEmail());
+            student.setPassword(studentDetails.getPassword());
+            student.setAddress(studentDetails.getAddress());
+            student.setPhone(studentDetails.getPhone());
+            return studentRepository.save(student);
+        }).orElse(null);
     }
 
     public boolean deleteStudent(Long id) {
-        try {
-            studentsRepository.deleteById(id);
+        return studentRepository.findById(id).map(student -> {
+            studentRepository.delete(student);
             return true;
-        } catch (Exception e) {
-            return false;
-        }
+        }).orElse(false);
     }
 }

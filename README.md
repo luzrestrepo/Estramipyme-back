@@ -1,105 +1,84 @@
 ## 🚀 **MVP Guide for the Backend Project**
 
 ### 1. **Define the MVP Scope and Requirements**
+
 - **Core Features**:
-  - User registration and login.
-  - CRUD for managing critical data.
-  - Basic authentication and authorization with JWT.
-  - Key endpoints for frontend data consumption.
-- **Technical Requirements**:
-  - **Database**: Minimal structure to store essential information.
-  - **REST API**: HTTP methods (GET, POST, PUT, DELETE) for CRUD operations.
-  - **Data Validation**: Implement basic rules for secure input.
+
+  - CRUD operations for managing data such as activities, administrators, professors, students, and companies.
+  - Tests for measuring company status.
+  - Data visualizations for monitoring registered companies and completed tests.
+  - **User Registration and Login**:
+
+    - Endpoints for user registration and login authentication.
+
+  - **Technical Requirements**:
+    - **Database**: Structure to store essential data for each CRUD.
+    - **REST API**: Implement HTTP methods (GET, POST, PUT, DELETE).
+    - **Data Validation**: Basic validation to ensure secure data handling.
 
 ---
 
 ### 2. **Design the Backend Architecture**
+
 - **Language and Framework**:
-  - **Java + Spring Boot**: For a robust backend.
-- **Architecture Model**:
-  - Monolithic architecture for simplicity or microservices if necessary.
-- **Route and Controller Management**: Modular and organized by functionality.
+  - **Java + Spring Boot** for reliable backend performance.
+- **Route and Controller Management**:
+  - Modular routes organized by functionalities.
 
 ---
 
 ### 3. **Configure the Database with Aiven**
-- **Aiven for Cloud Database**:
-  - Use Aiven to manage services like **PostgreSQL**, **Redis**, or **Kafka**.
-  - Configure the database connection in `src/main/resources/application.properties`:
+
+- **Database**:
+  - Using **MySQL**.
+  - Database configuration in `src/main/resources/application.properties`:
     ```properties
-    spring.datasource.url=jdbc:postgresql://your-aiven-service-url:your-port/your-database
+    spring.datasource.url=jdbc:mysql://your-database-url
     spring.datasource.username=your-username
     spring.datasource.password=your-password
-    spring.datasource.driver-class-name=org.postgresql.Driver
     spring.jpa.hibernate.ddl-auto=update
     ```
-- **Migrations and Seeds**: Set up scripts for changes and initial data.
+- **Migrations and Seed Data**:
+  - Scripts for database migrations and initial setup data.
 
 ---
 
-### 4. **Image Management with Cloudinary**
-- **Cloudinary**:
-  - Use Cloudinary for efficient image storage and management.
-  - Configure your Cloudinary credentials in a configuration file:
-    ```properties
-    cloudinary.cloud-name=your-cloud-name
-    cloudinary.api-key=your-api-key
-    cloudinary.api-secret=your-api-secret
-    ```
-- **Image Upload and Transformation**:
-  - Implement functionality to upload images to Cloudinary and apply transformations as needed.
+### 4. **Create REST API Endpoints**
+
+- **CRUD Operations**:
+  - Endpoints for each resource:
+    - `/activities`
+    - `/admins`
+    - `/teachers`
+    - `/students`
+    - `/companies`
+    - `/alerts`
+    - `/answers`
+    - `/graphs`
+    - `/tests`
+  - **Data Validation**:
+    - Validate input for each endpoint to ensure data integrity.
 
 ---
 
-### 5. **Authentication and Authorization**
-- **Authentication**:
-  - Use **JWT** for session tokens.
-  - Password encryption with tools like **bcrypt**.
-- **Authorization**:
-  - Roles and access policies for specific endpoints.
+### 5. **Authentication and Security**
+
+- **JWT Authentication**:
+  - Use **JSON Web Tokens (JWT)** to authenticate users in the system.
+  - Tokens should be generated at login and verified on each protected request.
+- **Role-Based Access**:
+  - Implement access control for specific endpoints based on user roles.
+- **Security Validation**:
+  - Validate and protect input data against common attacks.
 
 ---
 
-### 6. **Create REST API Endpoints**
-- **CRUD**:
-  - `/api/users` (GET, POST, PUT, DELETE)
-  - Other endpoints as needed.
-- **Validation and Error Handling**:
-  - Middleware for data validation and clear error handling.
+### 6. **Data Visualization and Testing**
 
----
-
-### 7. **Security**
-- **CORS**: Configure Cross-Origin Resource Sharing.
-- **HTTPS**: Secure communications.
-- **Protection**:
-  - **Rate Limiting**: Limit requests per IP.
-  - **Helmet**: Secure HTTP headers (for Node.js).
-  - Data validation to prevent attacks like SQL injection.
-
----
-
-### 8. **Testing and Validation**
-- **Unit and Integration Testing**:
-  - Tools like **JUnit**, **Mocha**, or **Pytest**.
-- **API Documentation**: With **Swagger** or **Postman**.
-- **Load Testing**: Identify and optimize bottlenecks.
-
----
-
-### 9. **Deployment and Monitoring**
-- **Deployment**:
-  - Platforms like **Heroku**, **AWS**, or **Google Cloud**.
-  - Use **Docker** for replicable environments.
-- **Monitoring**:
-  - Tools like **Prometheus** or **New Relic**.
-- **Log Management**: Configure with **Winston** or **Log4j**.
-
----
-
-### 10. **Optimization and Feedback**
-- **Optimize Queries**: Index and optimize the database.
-- **Feedback Collection**: Integrate tools to capture user feedback.
+- **Company Status Testing**:
+  - API for tracking the operational status of companies.
+- **Graph Controls**:
+  - Endpoints for visualizing registered companies and completed tests.
 
 ---
 
@@ -114,8 +93,3 @@
 - ![Aiven](https://aiven.io/_next/static/media/logo.aee7ea12.svg) **Aiven**
 - ![JWT](https://img.icons8.com/color/48/000000/json-web-token.png) **JWT**
 - ![Cloudinary](https://res.cloudinary.com/demo/image/upload/q_auto,f_auto,fl_lossy,dpr_2.0,w_48/cloudinary_icon.png) **Cloudinary** for image management
-
-
-
-
-
