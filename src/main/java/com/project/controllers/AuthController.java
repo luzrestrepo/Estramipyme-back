@@ -15,8 +15,7 @@ public class AuthController {
     private JwtTokenManagerService jwtTokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
-        // Simulación de autenticación; valida las credenciales contra la base de datos
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {    // Simulación de autenticación; valida las credenciales contra la base de datos
         if ("user@example.com".equals(authRequest.getEmail()) && "password123".equals(authRequest.getPassword())) {
                             String token = JwtTokenManagerService.generateToken(authRequest.getEmail(), "USER");
                             return ResponseEntity.ok(new AuthResponse(token));
