@@ -47,7 +47,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**", "/public/**").permitAll() // Permitir rutas públicas
+                .requestMatchers("/auth/**", "/public/**","students/").permitAll() // Permitir rutas públicas
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

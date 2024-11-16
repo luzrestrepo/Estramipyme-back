@@ -1,10 +1,11 @@
-// src/main/java/com/project/models/User.java
 package com.project.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import java.util.Set;
 
 @Entity
 public class User {
@@ -15,15 +16,15 @@ public class User {
 
     private String username;
     private String password;
-    private String role;
+    private Set<String> roles; // Para manejar múltiples roles
 
     // Constructor vacío (necesario para JPA)
     public User() {}
 
-    public User(String username, String password, String role) {
+    public User(String username, String password, Set<String> roles) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
     }
 
     // Getters y Setters
@@ -36,6 +37,6 @@ public class User {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+    public Set<String> getRoles() { return roles; }
+    public void setRoles(Set<String> roles) { this.roles = roles; }
 }
