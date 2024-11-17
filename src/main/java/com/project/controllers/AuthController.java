@@ -1,53 +1,36 @@
 package com.project.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.project.models.AuthRequest;
+import com.project.models.AuthResponse;
+import com.project.models.User;
+import com.project.services.AuthService;
 import com.project.services.JwtTokenManagerService;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    @SuppressWarnings("unused")
+    @Autowired
+    private AuthService authService;
+
     @Autowired
     private JwtTokenManagerService jwtTokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {    // Simulación de autenticación; valida las credenciales contra la base de datos
-        if ("user@example.com".equals(authRequest.getEmail()) && "password123".equals(authRequest.getPassword())) {
-                            String token = JwtTokenManagerService.generateToken(authRequest.getEmail(), "USER");
-                            return ResponseEntity.ok(new AuthResponse(token));
-                        } else {
-                            return ResponseEntity.status(401).body("Credenciales inválidas");
-                        }
-                    }
-                }
-                
-                class AuthRequest {
-                    @SuppressWarnings("unused")
-                    private String email;
-                    @SuppressWarnings("unused")
-                    private String password;
-                    public Object getEmail() {
-                        throw new UnsupportedOperationException("Unimplemented method 'getEmail'");
-                    }
-                    public Object getPassword() {
-                        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
-                    }
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        Optional<User> user = authService.authenticate(authRequest);
 
-    // Getters y setters
-}
-
-class AuthResponse {
-    private String token;
-
-    public AuthResponse(String token) {
-        this.token = token;
-    }
-
-    public String getToken() {
-        return token;
+        if (user.isPresent()) {
+            String token = jwtTokenService.generateToken(user.get().getEmail());
+            return ResponseEntity.ok(new AuthResponse(token));
+        } else {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
     }
 }

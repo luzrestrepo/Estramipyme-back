@@ -50,8 +50,8 @@ public class TeachersController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTeacher(@PathVariable int id) {
-        teachersService.deleteTeacher(id);
+    public ResponseEntity<Void> deleteTeacher(@PathVariable TeachersModel id) {
+        teachersService.createTeacher(id);
         return ResponseEntity.noContent().build();
     }
 }

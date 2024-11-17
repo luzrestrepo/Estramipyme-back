@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.models.AdminsModel;
+import com.project.models.StudentsModel;
 import com.project.repositories.AdminsRepository;
 
 @Service
@@ -40,5 +41,9 @@ public class AdminsService {
 
     public void deleteAdmin(int id) {
         adminRepository.deleteById(id);
+    }
+
+    public Optional<StudentsModel> findByEmail(String email) {
+        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
     }
 }

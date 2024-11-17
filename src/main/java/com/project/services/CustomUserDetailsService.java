@@ -2,6 +2,9 @@ package com.project.services;
 
 import com.project.models.User;
 import com.project.repositories.UserRepository;
+
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,12 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @SuppressWarnings("unused")
-    private final UserRepository userRepository;
-
     // Constructor para inyección de dependencias
     public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -28,7 +27,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .authorities(user.getRoles().toArray(new String[0]))  // Corregido aquí
+                .authorities(((Optional<User>) user.getRoles()).stream()
+                        .map(role -> role.getName())  // Asumiendo que Role tiene un método getName()
+                        .toArray(String[]::new))     // Convertir roles a un arreglo de Strings
                 .build();
     }
 }

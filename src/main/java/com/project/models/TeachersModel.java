@@ -1,18 +1,16 @@
 package com.project.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "teachers")
-public class TeachersModel {
+@DiscriminatorValue("TeachersModel") // Asegúrate de que esto coincida con el valor en la base de datos
+public class TeachersModel extends User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -22,37 +20,62 @@ public class TeachersModel {
 
     @Column(nullable = false, length = 100)
     private String password;
+    
+        @SuppressWarnings("unused")
+        private Set<String> roles;
+    
+        @Override
+        public Long getId() {
+            return id;
+        }
+    
+        @Override
+        public void setId(Long id) {
+            this.id = id;
+        }
+    
+        @Override
+        public String getName() {
+            return name;
+        }
+    
+        @Override
+        public void setName(String name) {
+            this.name = name;
+        }
+    
+        @Override
+        public String getEmail() {
+            return email;
+        }
+    
+        @Override
+        public void setEmail(String email) {
+            this.email = email;
+        }
+    
+        @Override
+        public String getPassword() {
+            return password;
+        }
+    
+        @Override
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    
+        @Override
+        public String getRoles() {
+            return null;  // Ajusta según el diseño de roles para el profesor
+        }
+    
+        @Override
+        public void setRoles(Set<String> roles) {
+            this.roles = roles;
+	}
 
-    // Getters and Setters 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
     }
 }

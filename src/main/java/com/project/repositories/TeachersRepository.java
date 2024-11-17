@@ -1,8 +1,13 @@
 package com.project.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.project.models.TeachersModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TeachersRepository  extends JpaRepository<TeachersModel, Integer>{}
-    
+import java.util.Optional;
 
+@Repository
+public interface TeachersRepository extends JpaRepository<TeachersModel, Integer> {
+    // Método para encontrar un profesor por su correo electrónico
+    Optional<TeachersModel> findByEmail(String email); 
+}
