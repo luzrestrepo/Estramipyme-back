@@ -9,8 +9,8 @@ public class CompaniesModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "professor_id")
-    private Integer professorId;
+    @Column(name = "teacher_id")
+    private Integer teacherId;
 
     @Column(name = "sector", length = 100)
     private String sector;
@@ -26,9 +26,6 @@ public class CompaniesModel {
 
     @Column(name = "password", length = 100)
     private String password;
-
-    @Column(name = "sector_size", length = 200)
-    private String sectorSize;
 
     @Column(name = "representative", length = 100)
     private String representative;
@@ -54,12 +51,12 @@ public class CompaniesModel {
         this.id = id;
     }
     
-    public Integer getProfessorId() {
-        return professorId;
+    public Integer getTeacherId() {
+        return teacherId;
     }
     
-    public void setProfessorId(Integer professorId) {
-        this.professorId = professorId;
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
     
     public String getSector() {
@@ -100,14 +97,6 @@ public class CompaniesModel {
     
     public void setPassword(String password) {
         this.password = password;
-    }
-    
-    public String getSectorSize() {
-        return sectorSize;
-    }
-    
-    public void setSectorSize(String sectorSize) {
-        this.sectorSize = sectorSize;
     }
     
     public String getRepresentative() {
