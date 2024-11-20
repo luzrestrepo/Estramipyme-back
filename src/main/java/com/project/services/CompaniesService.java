@@ -23,33 +23,30 @@ public class CompaniesService {
     }
 
     public CompaniesModel createCompany(CompaniesModel company) {
-        // Assign identification to rut or nit
-        if ("Legal".equalsIgnoreCase(company.getType())) {
+        if ("Legal".equalsIgnoreCase(company.getTypeUser())) {
             company.setNit(company.getIdentification());
-        } else if ("Natural".equalsIgnoreCase(company.getType())) {
+        } else if ("Natural".equalsIgnoreCase(company.getTypeUser())) {
             company.setRut(company.getIdentification());
         }
-        company.setIdentification(null);  // Clear the temporary field
+        company.setIdentification(null);
         return companiesRepository.save(company);
     }
 
     public CompaniesModel updateCompany(Integer companyId, CompaniesModel companyDetails) {
         return companiesRepository.findById(companyId).map(company -> {
-            company.setProfessorId(companyDetails.getProfessorId());
+            company.setTeacherId(companyDetails.getTeacherId());
             company.setSector(companyDetails.getSector());
-            company.setType(companyDetails.getType());
+            company.setTypeUser(companyDetails.getTypeUser());
             company.setName(companyDetails.getName());
             company.setEmail(companyDetails.getEmail());
             company.setPassword(companyDetails.getPassword());
-            company.setSectorSize(companyDetails.getSectorSize());
             company.setRepresentative(companyDetails.getRepresentative());
-            company.setCompanySize(companyDetails.getCompanySize());
+            company.setSizeCompany(companyDetails.getSizeCompany()); // Asegúrate de actualizar sizeCompany
 
-            // Update the nit or rut based on the type
-            if ("Legal".equalsIgnoreCase(companyDetails.getType())) {
+            if ("Legal".equalsIgnoreCase(companyDetails.getTypeUser())) {
                 company.setNit(companyDetails.getIdentification());
                 company.setRut(null);
-            } else if ("Natural".equalsIgnoreCase(companyDetails.getType())) {
+            } else if ("Natural".equalsIgnoreCase(companyDetails.getTypeUser())) {
                 company.setRut(companyDetails.getIdentification());
                 company.setNit(null);
             }
