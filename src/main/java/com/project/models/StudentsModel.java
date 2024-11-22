@@ -1,7 +1,5 @@
 package com.project.models;
 
-import java.util.Set;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -34,7 +32,7 @@ public class StudentsModel extends User {
     private String phone;
     
         @SuppressWarnings("unused")
-        private Set<String> roles;
+        private String role;
     
         @Override
         public Long getId() {
@@ -77,13 +75,13 @@ public class StudentsModel extends User {
         }
     
         @Override
-        public String getRoles() {
+        public String getRole() {
             return null;  // Ajusta según el diseño de roles para el estudiante
         }
     
         @Override
-        public void setRoles(Set<String> roles) {
-            this.roles = roles;
+        public void setRole(String role) {
+            this.role = role;
 	}
 
 	@Override

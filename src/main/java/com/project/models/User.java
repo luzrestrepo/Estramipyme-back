@@ -1,47 +1,74 @@
 package com.project.models;
 
-import java.util.Set;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.DiscriminatorType;
+import java.util.Collection;
+import java.util.List;
 
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     private String password;
     private String name;
-    @SuppressWarnings("unused")
-    private Set<String> roles;
-    private String username;
+    private String role;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role));
+    }
+
+    // This method is used to return the password of the user.
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    // This method is used to check if the user's account is expired or not.
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    // This method is used to check if the user is locked or not.
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    // This method is used to check if the user's credentials are expired or not.
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+
+    // This method is used to check if the user is enabled or not.
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     // Constructor sin parámetros
     public User() {
     }
 
     // Constructor con todos los parámetros
-    public User(String email, String password, String name, Set<String> roles, String username) {
+    public User(String email, String password, String name, String role) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.roles = roles;
-        this.username = username;
+        this.role = role;
     }
 
-    // Métodos getter y setter
+ // Métodos getter y setter
     public Long getId() {
         return id;
     }
@@ -74,19 +101,11 @@ public class User {
         this.name = name;
     }
 
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
+    public String getRole() {
+        return role;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Object getRoles() {
-        throw new UnsupportedOperationException("Unimplemented method 'getRoles'");
+    public void setRole(String role) {
+        this.role = role;
     }
 }

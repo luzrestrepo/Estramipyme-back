@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     static Optional<User> findByUsername(String username) {
         throw new UnsupportedOperationException("Unimplemented method 'findByUsername'");
     }
+
+    Optional<User> findByEmail(String email);
 }

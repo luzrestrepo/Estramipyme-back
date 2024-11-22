@@ -1,7 +1,5 @@
 package com.project.models;
 
-import java.util.Set;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -20,59 +18,59 @@ public class TeachersModel extends User {
 
     @Column(nullable = false, length = 100)
     private String password;
-    
-        @SuppressWarnings("unused")
-        private Set<String> roles;
-    
-        @Override
-        public Long getId() {
-            return id;
-        }
-    
-        @Override
-        public void setId(Long id) {
-            this.id = id;
-        }
-    
-        @Override
-        public String getName() {
-            return name;
-        }
-    
-        @Override
-        public void setName(String name) {
-            this.name = name;
-        }
-    
-        @Override
-        public String getEmail() {
-            return email;
-        }
-    
-        @Override
-        public void setEmail(String email) {
-            this.email = email;
-        }
-    
-        @Override
-        public String getPassword() {
-            return password;
-        }
-    
-        @Override
-        public void setPassword(String password) {
-            this.password = password;
-        }
-    
-        @Override
-        public String getRoles() {
-            return null;  // Ajusta según el diseño de roles para el profesor
-        }
-    
-        @Override
-        public void setRoles(Set<String> roles) {
-            this.roles = roles;
-	}
+
+    @SuppressWarnings("unused")
+    private String role;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String getRole() {
+        return null; // Ajusta según el diseño de roles para el profesor
+    }
+
+    @Override
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     @Override
     public String getUsername() {
