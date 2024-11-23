@@ -44,4 +44,28 @@ public class CompaniesController {
         boolean deleted = companiesService.deleteCompany(id);
         return deleted ? ResponseEntity.ok("Company with id " + id + " deleted.") : ResponseEntity.notFound().build();
     }
+
+    // Endpoint para obtener empresas por tipo
+    @GetMapping("/stats/users-by-type")
+    public List<Object[]> getUsersByType() {
+        return companiesService.countCompaniesByType();
+    }
+
+    // Endpoint para obtener empresas por sector
+    @GetMapping("/stats/companies-by-sector")
+    public List<Object[]> getCompaniesBySector() {
+        return companiesService.countCompaniesBySector();
+    }
+
+    // Endpoint para obtener empresas por tamaño
+    @GetMapping("/stats/companies-by-size")
+    public List<Object[]> getCompaniesBySize() {
+        return companiesService.countCompaniesBySize();
+    }
+
+    // Endpoint para obtener el total de empresas
+    @GetMapping("/stats/total-companies")
+    public long getTotalCompanies() {
+        return companiesService.countTotalCompanies();
+    }
 }
