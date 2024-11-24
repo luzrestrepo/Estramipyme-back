@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("StudentsModel")
-public class StudentsModel extends User {
+public class StudentsModel extends Userito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

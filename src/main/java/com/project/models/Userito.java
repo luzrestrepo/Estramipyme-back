@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Entity
-public class User implements UserDetails {
+public class Userito implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,7 +49,6 @@ public class User implements UserDetails {
         return true;
     }
 
-
     // This method is used to check if the user is enabled or not.
     @Override
     public boolean isEnabled() {
@@ -57,11 +56,11 @@ public class User implements UserDetails {
     }
 
     // Constructor sin parámetros
-    public User() {
+    public Userito() {
     }
 
     // Constructor con todos los parámetros
-    public User(String email, String password, String name, String role) {
+    public Userito(String email, String password, String name, String role) {
         this.email = email;
         this.password = password;
         this.name = name;

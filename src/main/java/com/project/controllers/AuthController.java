@@ -11,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import com.project.models.User;
+import com.project.models.Userito;
 import com.project.repositories.UserRepository;
 import com.project.security.JwtUtil;
 import com.project.services.CustomUserDetailsService;
@@ -34,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
+    public ResponseEntity<?> registerUser(@RequestBody Userito user) {
         if (user == null) {
             return ResponseEntity.badRequest().body("El cuerpo de la solicitud está vacío.");
         }
@@ -54,7 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody User user) {
+    public ResponseEntity<?> authenticateUser(@RequestBody Userito user) {
         try {
             // Intentar autenticar al usuario
             authenticationManager.authenticate(
@@ -78,8 +78,8 @@ public class AuthController {
     }
 
     @GetMapping("/profile/{email}")
-    public ResponseEntity<User> getUserProfile(@PathVariable String email) {
-        Optional<User> user = userRepository.findByEmail(email);
+    public ResponseEntity<Userito> getUserProfile(@PathVariable String email) {
+        Optional<Userito> user = userRepository.findByEmail(email);
         return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 

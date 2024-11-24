@@ -1,6 +1,6 @@
 package com.project.services;
 
-import com.project.models.User;
+import com.project.models.Userito;
 import com.project.models.AuthRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +23,13 @@ public class AuthService {
      * @param password La contraseña del usuario.
      * @return Un Optional de User si se encuentra el usuario y la contraseña es válida, de lo contrario, Optional vacío.
      */
-    public Optional<User> authenticate(String email, String password) {
+    public Optional<Userito> authenticate(String email, String password) {
         // Intentar encontrar al usuario en estudiantes
-        Optional<User> user = studentsService.findByEmail(email).map(student -> (User) student);
+        Optional<Userito> user = studentsService.findByEmail(email).map(student -> (Userito) student);
 
         // Si no se encuentra, intentar con profesores
         if (user.isEmpty()) {
-            user = teachersService.findByEmail(email).map(teacher -> (User) teacher);
+            user = teachersService.findByEmail(email).map(teacher -> (Userito) teacher);
         }
 
         // Filtrar por contraseña
@@ -43,7 +43,7 @@ public class AuthService {
      * @param authRequest El objeto que contiene las credenciales de autenticación (email y password).
      * @return El mismo tipo de Optional<User> si el proceso de autenticación es exitoso.
      */
-    public Optional<User> authenticate(AuthRequest authRequest) {
+    public Optional<Userito> authenticate(AuthRequest authRequest) {
         // Llamada al método anterior usando los datos de AuthRequest
         return authenticate(authRequest.getEmail(), authRequest.getPassword());
     }

@@ -1,6 +1,6 @@
 package com.project.services;
 
-import com.project.models.User;
+import com.project.models.Userito;
 import com.project.repositories.UserRepository;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         @Override
         public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
                 // Busca el usuario por nombre de usuario
-                User user = userRepository.findByEmail(email)
+                Userito user = userRepository.findByEmail(email)
                                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
 
                 // Construye y devuelve un UserDetails
@@ -39,10 +39,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                                 new ArrayList<>());
         }
 
-        public Optional<User> findUserByEmail(String email) {
+        public Optional<Userito> findUserByEmail(String email) {
                 return userRepository.findByEmail(email);
             }
-        public User saveUser(User user) {
+        public Userito saveUser(Userito user) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 return userRepository.save(user);
             }
