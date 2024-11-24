@@ -2,9 +2,9 @@ package com.project.services;
 
 import com.project.models.CompaniesModel;
 import com.project.repositories.CompaniesRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -80,5 +80,17 @@ public class CompaniesService {
     // Método para contar el total de empresas
     public long countTotalCompanies() {
         return companiesRepository.count();
+    }
+//solo agregue tdo lo relacionado  a tests
+    @Transactional
+        public CompaniesModel updateTestStatus(Integer companyId, Boolean isTestDone) {
+        CompaniesModel existingCompany = companiesRepository.findById(companyId)
+            .orElseThrow(() -> new RuntimeException("Company not found with id: " + companyId));
+
+        // Ejecutar update específico solo para is_test_done
+        companiesRepository.updateTestStatus(companyId, isTestDone);
+        
+        // Retornar la compañía actualizada
+        return companiesRepository.findById(companyId).orElseThrow();
     }
 }

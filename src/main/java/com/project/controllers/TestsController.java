@@ -1,48 +1,62 @@
 package com.project.controllers;
 
-import com.project.models.TestsModel;
+import com.project.dto.TestRequestDTO;
+
 import com.project.services.TestsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/tests")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TestsController {
 
-    @Autowired
+   @Autowired
     private TestsService testsService;
 
-    // Get all tests
-    @GetMapping
-    public List<TestsModel> getAllTests() {
-        return testsService.getAllTests();
+      @GetMapping
+    public ResponseEntity<?> getTestByCompanyId(@RequestParam("id") String companyId) {
+        try {
+            System.out.println("Buscando test para compañía ID: " + companyId);
+            TestRequestDTO testDTO = testsService.getTestWithAnswersByCompanyId(companyId);
+            return ResponseEntity.ok(testDTO);
+        } catch (Exception e) {
+            System.err.println("Error buscando test: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-    // Get test by ID
-    @GetMapping("/{id}")
-    public Optional<TestsModel> getTestById(@PathVariable Integer id) {
-        return testsService.getTestById(id);
-    }
-
-    // Create a new test
     @PostMapping
-    public TestsModel createTest(@RequestBody TestsModel test) {
-        return testsService.createTest(test);
+    public ResponseEntity<?> createTest(@RequestBody TestRequestDTO testDTO) {
+        try {
+            System.out.println("Recibiendo nuevo test: " + testDTO);
+            TestRequestDTO savedTest = testsService.saveCompleteTest(testDTO);
+            return ResponseEntity.ok(savedTest);
+        } catch (Exception e) {
+            System.err.println("Error creando test: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+    
 
-    // Update test by ID
     @PutMapping("/{id}")
-    public TestsModel updateTest(@PathVariable Integer id, @RequestBody TestsModel testDetails) {
-        return testsService.updateTest(id, testDetails);
-    }
-
-    // Delete test by ID
-    @DeleteMapping("/{id}")
-    public String deleteTest(@PathVariable Integer id) {
-        boolean isDeleted = testsService.deleteTest(id);
-        return isDeleted ? "Test with ID " + id + " deleted successfully." : "Failed to delete test with ID " + id;
+    public ResponseEntity<?> updateTest(
+        @PathVariable String id, 
+        @RequestBody TestRequestDTO testDTO
+    ) {
+        System.out.println("Actualizando test para company: " + id);
+        try {
+            TestRequestDTO updatedTest = testsService.updateCompleteTest(id, testDTO);
+            System.out.println("Test actualizado exitosamente: " + updatedTest);
+            return ResponseEntity.ok(updatedTest);
+        } catch (Exception e) {
+            System.err.println("Error actualizando test: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
+
