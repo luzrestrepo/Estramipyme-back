@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/companies")
 public class CompaniesController {
@@ -42,5 +43,29 @@ public class CompaniesController {
     public ResponseEntity<String> deleteCompany(@PathVariable Integer id) {
         boolean deleted = companiesService.deleteCompany(id);
         return deleted ? ResponseEntity.ok("Company with id " + id + " deleted.") : ResponseEntity.notFound().build();
+    }
+
+    // Endpoint para obtener empresas por tipo
+    @GetMapping("/stats/users-by-type")
+    public List<Object[]> getUsersByType() {
+        return companiesService.countCompaniesByType();
+    }
+
+    // Endpoint para obtener empresas por sector
+    @GetMapping("/stats/companies-by-sector")
+    public List<Object[]> getCompaniesBySector() {
+        return companiesService.countCompaniesBySector();
+    }
+
+    // Endpoint para obtener empresas por tamaño
+    @GetMapping("/stats/companies-by-size")
+    public List<Object[]> getCompaniesBySize() {
+        return companiesService.countCompaniesBySize();
+    }
+
+    // Endpoint para obtener el total de empresas
+    @GetMapping("/stats/total-companies")
+    public long getTotalCompanies() {
+        return companiesService.countTotalCompanies();
     }
 }
