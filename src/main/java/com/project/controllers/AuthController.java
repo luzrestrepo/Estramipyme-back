@@ -1,5 +1,7 @@
 package com.project.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.models.User;
+import com.project.repositories.UserRepository;
 import com.project.security.JwtUtil;
 import com.project.services.CustomUserDetailsService;
 
@@ -18,12 +21,14 @@ import com.project.services.CustomUserDetailsService;
 public class AuthController {
 
     private final CustomUserDetailsService userService;
+    private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
     @Autowired
-    public AuthController(CustomUserDetailsService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public AuthController(CustomUserDetailsService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
@@ -70,6 +75,12 @@ public class AuthController {
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().body("Credenciales inválidas.");
         }
+    }
+
+    @GetMapping("/profile/{email}")
+    public ResponseEntity<User> getUserProfile(@PathVariable String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
 }
