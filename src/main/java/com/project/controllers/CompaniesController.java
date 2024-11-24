@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -67,5 +68,36 @@ public class CompaniesController {
     @GetMapping("/stats/total-companies")
     public long getTotalCompanies() {
         return companiesService.countTotalCompanies();
+    }
+//todo lo relacionado a tests
+    @PutMapping("/{id}/test-status")
+    public ResponseEntity<?> updateTestStatus(
+    @PathVariable Integer id,
+    @RequestBody Map<String, Boolean> updates
+    ) {
+        try {
+            // Obtener la compañía antes de la actualización
+            CompaniesModel currentCompany = companiesService.getCompanyById(id)
+                .orElseThrow(() -> new RuntimeException("Company not found"));
+
+            System.out.println("Compañía antes de actualizar:");
+            System.out.println("ID: " + currentCompany.getId());
+            System.out.println("Nombre: " + currentCompany.getName());
+            System.out.println("Sector: " + currentCompany.getSector());
+
+            // Actualizar solo el estado del test
+            CompaniesModel updatedCompany = companiesService.updateTestStatus(id, updates.get("isTestDone"));
+
+            System.out.println("Compañía después de actualizar:");
+            System.out.println("ID: " + updatedCompany.getId());
+            System.out.println("Nombre: " + updatedCompany.getName());
+            System.out.println("Sector: " + updatedCompany.getSector());
+
+            return ResponseEntity.ok(updatedCompany);
+        } catch (Exception e) {
+            System.err.println("Error en updateTestStatus: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
     }
 }

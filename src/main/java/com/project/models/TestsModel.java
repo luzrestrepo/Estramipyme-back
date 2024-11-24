@@ -17,6 +17,10 @@ public class TestsModel {
     @Column(name = "date")
     private Date date;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id", insertable = false, updatable = false)
+    private CompaniesModel company;
+
     // Getters and Setters
     public Integer getId() {
         return id;
