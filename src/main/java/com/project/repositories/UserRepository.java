@@ -1,7 +1,6 @@
 package com.project.repositories;
 
 import com.project.models.Userito;
-import com.project.models.Userito;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
