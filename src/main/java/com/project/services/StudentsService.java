@@ -29,7 +29,7 @@ public class StudentsService {
     public StudentsModel updateStudent(Long id, StudentsModel studentDetails) {
         return studentRepository.findById(id).map(student -> {
             student.setCompanyId(studentDetails.getCompanyId());
-            student.setProfessorId(studentDetails.getProfessorId());
+            student.setTeacherId(studentDetails.getTeacherId());
             student.setName(studentDetails.getName());
             student.setEmail(studentDetails.getEmail());
             student.setPassword(studentDetails.getPassword());

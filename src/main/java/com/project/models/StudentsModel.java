@@ -13,8 +13,8 @@ public class StudentsModel {
     @Column(name = "company_id")
     private Integer companyId;
 
-    @Column(name = "professor_id")
-    private Integer professorId;
+    @Column(name = "teacher_id")
+    private Integer teacherId;
 
     @Column(name = "name", length = 100)
     private String name;
@@ -48,12 +48,12 @@ public class StudentsModel {
         this.companyId = companyId;
     }
 
-    public Integer getProfessorId() {
-        return professorId;
+    public Integer getTeacherId() {
+        return teacherId;
     }
 
-    public void setProfessorId(Integer professorId) {
-        this.professorId = professorId;
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getName() {
