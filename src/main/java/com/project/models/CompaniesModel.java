@@ -1,5 +1,6 @@
 package com.project.models;
-
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
@@ -139,4 +140,18 @@ public class CompaniesModel {
     public void setIdentification(String identification) {
         this.identification = identification;
     }
+
+    @Column(name = "is_test_done")
+    private Boolean isTestDone;
+
+    public Boolean getIsTestDone() {
+        return isTestDone;
+    }
+
+    public void setIsTestDone(Boolean isTestDone) {
+        this.isTestDone = isTestDone;
+    }
+    // CompaniesModel
+    @OneToMany(mappedBy = "company")
+    private List<TestsModel> tests = new ArrayList<>();
 }

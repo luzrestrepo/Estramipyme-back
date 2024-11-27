@@ -1,121 +1,236 @@
-## 🚀 **MVP Guide for the Backend Project**
+<p align="right">
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=estramipyme.backend" />
+</p>
 
-### 1. **Define the MVP Scope and Requirements**
-- **Core Features**:
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/240906093-9be4d344-6782-461a-b5a6-32a07bf7b34e.gif">
+</p>
+
+<div align="center">
+  <h1>📘 EstramiPyme Backend Project</h1>
+  <p>
+    A backend platform to digitize strategic business tools inspired by Universidad EAFIT's MBA book.<br>
+    🚀 Designed to empower businesses nationally and internationally.
+  </p>
+</div>
+
+---
+
+## 📋 MVP Guide for EstramiPyme Backend Project
+
+### 1️⃣ Project Context
+EstramiPyme is a platform inspired by a book developed by the MBA program at **Universidad EAFIT**. The project aims to digitize historical business strategies, making them accessible in modern environments.  
+
+---
+
+### 2️⃣ MVP Scope and Requirements
+
+#### **Core Features**
+1. **Authentication and Authorization (future developments):**
+   - User registration and login.
+   - Secure session management using **JWT**.
+   - Role-based access: Administrators, Students, and Teachers.
+
+2. **Data Management:**
+   - CRUD operations for entities like:
+     - `/activities`  
+     - `/admins`  
+     - `/alerts`  
+     - `/answers`  
+     - `/companies`  
+     - `/graphs`  
+     - `/questions`  
+     - `/students`  
+     - `/teachers`  
+     - `/tests`
+
+3. **API for Frontend Integration:**
+   - RESTful endpoints for seamless backend-frontend communication.
+
+#### **Technical Requirements**
+- **Database:** MySQL for critical entities.
+- **REST API:** Full CRUD implementation.
+- **Validation:** Strict rules to ensure data integrity.
+
+---
+
+### 🖥️ Frontend Architecture
+
+#### **Repository:** EstramiPyme Frontend  
+- **Technologies Used:**
+  - Language: **TypeScript (Angular)**
+  - Styling: **Tailwind CSS**
+- **Key Features:**
   - User registration and login.
-  - CRUD for managing critical data.
-  - Basic authentication and authorization with JWT.
-  - Key endpoints for frontend data consumption.
-- **Technical Requirements**:
-  - **Database**: Minimal structure to store essential information.
-  - **REST API**: HTTP methods (GET, POST, PUT, DELETE) for CRUD operations.
-  - **Data Validation**: Implement basic rules for secure input.
+  - Admin dashboard to manage users, view tests, and graphs.
 
 ---
 
-### 2. **Design the Backend Architecture**
-- **Language and Framework**:
-  - **Java + Spring Boot**: For a robust backend.
-- **Architecture Model**:
-  - Monolithic architecture for simplicity or microservices if necessary.
-- **Route and Controller Management**: Modular and organized by functionality.
+### ⚙️ Backend Architecture
+
+#### **Technologies Used:**
+
+## 🚀 Tecnologías Principales  
+
+<div align="center">
+
+  <table>
+    <tr>
+      <td align="center">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="60" height="60">
+        <br />
+        <strong>Java 17</strong>
+        <br />
+        <span>Lenguaje de programación principal</span>
+      </td>
+      <td align="center">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original-wordmark.svg" alt="Spring Boot" width="60" height="60">
+        <br />
+        <strong>Spring Boot 3.3.4</strong>
+        <br />
+        <span>Framework para la creación de aplicaciones Java</span>
+      </td>
+      <td align="center">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" width="60" height="60">
+        <br />
+        <strong>MySQL</strong>
+        <br />
+        <span>Base de datos relacional</span>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://www.vectorlogo.zone/logos/hibernate/hibernate-icon.svg" alt="Hibernate" width="60" height="60">
+        <br />
+        <strong>Hibernate ORM</strong>
+        <br />
+        <span>Gestión de entidades y acceso a la base de datos</span>
+      </td>
+      <td align="center">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jsonwebtokens/jsonwebtokens-plain.svg" alt="JWT" width="60" height="60">
+        <br />
+        <strong>JWT</strong>
+        <br />
+        <span>Autenticación y autorización de usuarios</span>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+#### **Structure:**
+- Controllers: Handle HTTP requests.
+- Services: Contain business logic.
+- Repositories: Manage database access.
+- DTOs: Structure data exchange between layers.
 
 ---
 
-### 3. **Configure the Database with Aiven**
-- **Aiven for Cloud Database**:
-  - Use Aiven to manage services like **PostgreSQL**, **Redis**, or **Kafka**.
-  - Configure the database connection in `src/main/resources/application.properties`:
-    ```properties
-    spring.datasource.url=jdbc:postgresql://your-aiven-service-url:your-port/your-database
-    spring.datasource.username=your-username
-    spring.datasource.password=your-password
-    spring.datasource.driver-class-name=org.postgresql.Driver
-    spring.jpa.hibernate.ddl-auto=update
-    ```
-- **Migrations and Seeds**: Set up scripts for changes and initial data.
+### 🌐 Endpoints Overview
+
+#### Supported HTTP Methods:
+- **GET**: Retrieve information.
+- **POST**: Create new records.
+- **PUT**: Update existing records.
+- **DELETE**: Delete records.
+
+#### **Main Endpoints:**
+- `/activities`: Manage business activities.
+- `/admins`: Handle system administrators.
+- `/alerts`: Record important alerts.
+- `/answers`: Manage answers to system questions.
+- `/auth`: Handle user registration and login.
+- `/companies`: Manage registered companies.
+- `/graphs`: Generate and query business graphs.
+- `/questions`: Configure and edit system questions.
+- `/students`: Manage enrolled students.
+- `/teachers`: Administer associated teachers.
+- `/tests`: Manage assessments and evaluations.
 
 ---
 
-### 4. **Image Management with Cloudinary**
-- **Cloudinary**:
-  - Use Cloudinary for efficient image storage and management.
-  - Configure your Cloudinary credentials in a configuration file:
-    ```properties
-    cloudinary.cloud-name=your-cloud-name
-    cloudinary.api-key=your-api-key
-    cloudinary.api-secret=your-api-secret
-    ```
-- **Image Upload and Transformation**:
-  - Implement functionality to upload images to Cloudinary and apply transformations as needed.
+### 👥 Project Collaborators
+
+#### **Current Team:**
+- **Project Owner:** MBA EAFIT Team - Strategic goal definition.
+- **Mentor:** David Arias Fuentes
+- **Backend Developers:**
+  - [Luz Restrepo](#)
+  - [Judy Alexandra Cuartas Osorio](#)
+  - [Didian Alejandro Valencia](#)
+  - [Sebastian Perez Jimenez](#)
+  - [Simon Diaz David](#)
+
+#### **Open Roles:**
+- **QA Tester:** Validate API and endpoints using Postman.
+- **UX/UI Designer:** Enhance platform interface experience.
+- **Data Analyst:** Optimize graphs and visualizations.
+
+#### **Project Timeline:**
+- **Management Tool:** JIRA
+- **Duration:** October 7, 2024 – November 19, 2024
 
 ---
 
-### 5. **Authentication and Authorization**
-- **Authentication**:
-  - Use **JWT** for session tokens.
-  - Password encryption with tools like **bcrypt**.
-- **Authorization**:
-  - Roles and access policies for specific endpoints.
+### 🔒 System Security (Future Developments)
+- **Secure Authentication:** JWT for session management.
+- **Data Protection:** Password encryption with bcrypt.
+- **API Security:**
+  - Configured CORS policies.
+  - Strict input validation.
+  - SQL injection prevention using prepared statements.
 
 ---
 
-### 6. **Create REST API Endpoints**
-- **CRUD**:
-  - `/api/users` (GET, POST, PUT, DELETE)
-  - Other endpoints as needed.
-- **Validation and Error Handling**:
-  - Middleware for data validation and clear error handling.
+### 🚀 Optimization and Feedback
+- **Feedback Collection:** Surveys for user and admin feedback.
+- **Continuous Improvements:**
+  - Database indexing for faster queries.
+  - Reducing API response times.
 
 ---
 
-### 7. **Security**
-- **CORS**: Configure Cross-Origin Resource Sharing.
-- **HTTPS**: Secure communications.
-- **Protection**:
-  - **Rate Limiting**: Limit requests per IP.
-  - **Helmet**: Secure HTTP headers (for Node.js).
-  - Data validation to prevent attacks like SQL injection.
+<div align="center">
+  <h2>⚒️ Technologies ⚒️</h2>
+  <img src="https://skillicons.dev/icons?i=java,spring,mysql,maven,angular,tailwind, />
+</div>
 
 ---
 
-### 8. **Testing and Validation**
-- **Unit and Integration Testing**:
-  - Tools like **JUnit**, **Mocha**, or **Pytest**.
-- **API Documentation**: With **Swagger** or **Postman**.
-- **Load Testing**: Identify and optimize bottlenecks.
+<div align="center">
+  <h3>
+    <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=25&center=true&vCenter=true&width=500&height=70&duration=4000&lines=Thanks+for+visiting!+✌️;+Let's+build+something+great+together!">
+  </h3>
+</div>
 
----
+<div>
+# 📂 Estructura de Carpetas de EstramiPyme Backend
 
-### 9. **Deployment and Monitoring**
-- **Deployment**:
-  - Platforms like **Heroku**, **AWS**, or **Google Cloud**.
-  - Use **Docker** for replicable environments.
-- **Monitoring**:
-  - Tools like **Prometheus** or **New Relic**.
-- **Log Management**: Configure with **Winston** or **Log4j**.
+```plaintext
+EstramiPyme-Backend/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── estramipyme/
+│   │   │           ├── controller/         # Controladores HTTP
+│   │   │           ├── service/            # Lógica de negocio
+│   │   │           ├── repository/         # Acceso a la base de datos
+│   │   │           ├── model/              # Clases de entidades
+│   │   │           ├── dto/                # Data Transfer Objects
+│   │   │           └── configuration/      # Configuraciones del proyecto
+│   │   └── resources/
+│   │       ├── static/                     # Archivos estáticos (si aplica)
+│   │       ├── templates/                  # Plantillas (si aplica)
+│   │       └── application.properties      # Configuración de Spring Boot
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── estramipyme/
+│                   └── test/               # Clases de pruebas unitarias
+├── target/                                 # Archivos generados por Maven
+├── .gitignore                              # Archivos y carpetas ignoradas por Git
+├── pom.xml                                 # Archivo de configuración de Maven
+└── README.md                               # Documentación del proyecto
 
----
-
-### 10. **Optimization and Feedback**
-- **Optimize Queries**: Index and optimize the database.
-- **Feedback Collection**: Integrate tools to capture user feedback.
-
----
-
-## 🛠 **Technologies Used**
-
-## Backend Stack 🚀
-
-- ![Java](https://img.icons8.com/color/48/000000/java-coffee-cup-logo--v1.png) **Java**
-- ![Spring Boot](https://img.icons8.com/color/48/000000/spring-logo.png) **Spring Boot**
-- ![Maven](https://img.icons8.com/color/48/000000/apache-maven.png) **Maven**
-- ![SQL](https://img.icons8.com/ios-filled/50/000000/database.png) **SQL** (using Aiven)
-- ![Aiven](https://aiven.io/_next/static/media/logo.aee7ea12.svg) **Aiven**
-- ![JWT](https://img.icons8.com/color/48/000000/json-web-token.png) **JWT**
-- ![Cloudinary](https://res.cloudinary.com/demo/image/upload/q_auto,f_auto,fl_lossy,dpr_2.0,w_48/cloudinary_icon.png) **Cloudinary** for image management
-
-
-
-
-
+</div>
