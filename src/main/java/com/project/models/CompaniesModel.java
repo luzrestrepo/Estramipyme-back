@@ -12,7 +12,7 @@ public class CompaniesModel {
     private Integer id;
 
     @Column(name = "teacher_id")
-    private Integer teacherId; // Cambié professorId a teacherId
+    private Integer teacherId;
 
     @Column(name = "sector", length = 100)
     private String sector;
@@ -52,11 +52,11 @@ public class CompaniesModel {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public Integer getTeacherId() {
         return teacherId;
     }
-
+    
     public void setTeacherId(Integer teacherId) {
         this.teacherId = teacherId;
     }
@@ -100,7 +100,7 @@ public class CompaniesModel {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public String getRepresentative() {
         return representative;
     }

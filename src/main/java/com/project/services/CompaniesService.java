@@ -23,7 +23,8 @@ public class CompaniesService {
     }
 
     public CompaniesModel createCompany(CompaniesModel company) {
-        if ("Legal".equalsIgnoreCase(company.getTypeUser())) {
+        // Assign identification to rut or nit
+        if ("Jurídica".equalsIgnoreCase(company.getTypeUser())) {
             company.setNit(company.getIdentification());
         } else if ("Natural".equalsIgnoreCase(company.getTypeUser())) {
             company.setRut(company.getIdentification());
@@ -43,7 +44,7 @@ public class CompaniesService {
             company.setRepresentative(companyDetails.getRepresentative());
             company.setSizeCompany(companyDetails.getSizeCompany());
 
-            if ("Legal".equalsIgnoreCase(companyDetails.getTypeUser())) {
+            if ("Jurídica".equalsIgnoreCase(companyDetails.getTypeUser())) {
                 company.setNit(companyDetails.getIdentification());
                 company.setRut(null);
             } else if ("Natural".equalsIgnoreCase(companyDetails.getTypeUser())) {
